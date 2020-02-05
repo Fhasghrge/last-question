@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-const Home  = () => import('../components/homo.vue')
+const Home  = () => import('../components/home.vue')
 const Commit  = () => import('../components/commit.vue')
 const Quest  = () => import('../components/quest.vue')
 const QuestLast  = () => import('../components/questLast.vue')

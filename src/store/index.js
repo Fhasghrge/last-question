@@ -6,11 +6,12 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     turn: 0,
-    grade: 0
+    grade: 0,
+    isMusicOn: false
   },
   mutations: {
-    increment (state) {
-      state.count++
+    turnMusic (state) {
+      state.isMusicOn = ! state.isMusicOn
     }
   }
 })
