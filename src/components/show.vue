@@ -1,13 +1,13 @@
 <template>
-  <div id="questLast">
+  <div id="show">
 
   </div>
 </template>
 <script>
 export default {
-  name: 'questLast'
+  name: 'show'
 }
 </script>
 <style scoped>
-  @import url('./../assets/css/index.css');
+
 </style>

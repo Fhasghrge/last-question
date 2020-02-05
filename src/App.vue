@@ -4,12 +4,12 @@
       <img src="./assets/img/musicoff.png" alt="music" />
     </div>
     <!-- 等待解决 -->
-    <audio autoplay="autoplay">
+    <!-- <audio autoplay="autoplay">
       <source
         src="./assets/music/bgm.mp3"
         type="audio/mpeg"
       />
-    </audio>
+    </audio> -->
     <router-view></router-view>
   </div>
 </template>

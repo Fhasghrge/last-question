@@ -4,7 +4,7 @@ Vue.use(Router)
 const Home  = () => import('../components/home.vue')
 const Commit  = () => import('../components/commit.vue')
 const Quest  = () => import('../components/quest.vue')
-const QuestLast  = () => import('../components/questLast.vue')
+const Show  = () => import('../components/show.vue')
 export default new Router({
   routes: [
     {
@@ -24,8 +24,8 @@ export default new Router({
       component: Quest
     },
     {
-      path: '/questLast',
-      component: QuestLast
+      path: '/show',
+      component: Show
     }
   ],
   mode: 'history'
