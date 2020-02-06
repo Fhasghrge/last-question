@@ -9,7 +9,7 @@
       <p style="font-size: .8em; font-weight: normal">
         快来看看你对成电有多了解
       </p>
-      <router-link to="/quest" tag="button">开始考试</router-link>
+      <router-link to="/commit" tag="button">开始考试</router-link>
     </div>
   </div>
 </template>

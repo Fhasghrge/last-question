@@ -16,7 +16,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/promise',
+      path: '/commit',
       component: Commit
     },
     {
