@@ -1,7 +1,9 @@
 <template>
   <div id="commit">
     <div id="title">承诺书</div>
-    <p>党按照德才兼备、以德为先的原则选拔干部，坚持五湖四海、任人唯贤，反对任人唯亲，努力实现干部队伍的革命化、年轻化、知识化、专业化。</p>
+    <p>
+      党按照德才兼备、以德为先的原则选拔干部，坚持五湖四海、任人唯贤，反对任人唯亲，努力实现干部队伍的革命化、年轻化、知识化、专业化。
+    </p>
     <div id="btn">
       <router-link to="/quest" tag="button">开始答题</router-link>
     </div>
@@ -9,11 +11,11 @@
 </template>
 <script>
 export default {
-  name: "commit"
+  name: 'commit'
 };
 </script>
 <style scoped>
-@import url("./../assets/css/index.css");
+@import url('./../assets/css/index.css');
 #title {
   text-align: center;
   font-size: 2em;
@@ -27,7 +29,7 @@ p {
   margin: 2em auto;
   text-align: center;
   line-height: 2em;
-  padding: 0 12px
+  padding: 0 12px;
 }
 button {
   background-color: rgb(246, 174, 68);

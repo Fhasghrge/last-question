@@ -19,10 +19,7 @@ export default {
 };
 </script>
 <style scoped>
-@import url('../assets/css/index.css');
-#logo {
-  border: 1px solid red;
-}
+@import url('./../assets/css/index.css');
 #logo > img {
   position: absolute;
   width: 100vw;

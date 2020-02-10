@@ -5,6 +5,7 @@ const Home  = () => import('../components/home.vue')
 const Commit  = () => import('../components/commit.vue')
 const Quest  = () => import('../components/quest.vue')
 const Show  = () => import('../components/show.vue')
+const Manage  = () => import('../components/guanli/manage.vue') // 待删除
 export default new Router({
   routes: [
     {
@@ -26,6 +27,10 @@ export default new Router({
     {
       path: '/show',
       component: Show
+    },
+    { // 待删除
+      path:'/manage',
+      component: Manage
     }
   ],
   mode: 'history'
