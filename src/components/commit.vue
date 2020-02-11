@@ -35,10 +35,10 @@ button {
   background-color: rgb(246, 174, 68);
   border: 0.3px solid black;
   color: white;
-  height: 1.8em;
-  width: 6em;
+  height: 2.2em;
+  width: 7em;
   margin: 0 auto;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 #btn {
   display: flex;

@@ -7,11 +7,22 @@ const store = new Vuex.Store({
   state: {
     turn: 0,
     grade: 0,
-    isMusicOn: false
+    isMusicOn: false,
+    info: {
+      openid: '',
+      nickname: '',
+      headimgurl: ''
+    }
   },
   mutations: {
     turnMusic (state) {
       state.isMusicOn = ! state.isMusicOn
+    },
+    reduceTurn (state) {
+      state.turn--
+    },
+    addTurn (state) {
+      state.turn++
     }
   }
 })

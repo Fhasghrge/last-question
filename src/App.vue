@@ -21,6 +21,17 @@ export default {
     changeMusic() {
       this.$store.commit('turnMusic');
     }
+  },
+  mounted: function() {
+        let ua = window.navigator.userAgent.toLowerCase();
+        console.log(ua);//mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            return true;
+        }
+        else {
+          console.log('不是微信')
+          // window.parent.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx135f29e2d2abe22f&redirect_uri=http%3A%2F%2Fbiye.stuhome.com%2Fstaging%2Fwxlogin.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
+        }
   }
 };
 </script>
