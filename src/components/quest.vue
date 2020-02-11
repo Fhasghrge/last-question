@@ -2,12 +2,24 @@
   <div id="quest">
     <div id="title">题目</div>
     <p>{{questions[this.$store.state.turn].question}}?</p>
-    <ul>
-      <li>A.{{questions[this.$store.state.turn].options.split(",")[0]}}</li>
-      <li>B.{{questions[this.$store.state.turn].options.split(",")[1]}}</li>
-      <li>C.{{questions[this.$store.state.turn].options.split(",")[2]}}</li>
-      <li>D.{{questions[this.$store.state.turn].options.split(",")[3]}}</li>
-    </ul>
+    <!-- <ul>
+      <li @click="xuanze" value="0">A. {{questions[this.$store.state.turn].options.split(",")[0]}}</li>
+      <li @click="xuanze" value="1">B. {{questions[this.$store.state.turn].options.split(",")[1]}}</li>
+      <li @click="xuanze" value="2">C. {{questions[this.$store.state.turn].options.split(",")[2]}}</li>
+      <li @click="xuanze" value="3">D. {{questions[this.$store.state.turn].options.split(",")[3]}}</li>
+    </ul>-->
+    <input type="radio" id="one" :value="options[0]" v-model="picked" />
+    <label for="one">{{options[0]}}</label>
+    <br />
+    <input type="radio" id="two" :value="options[1]" v-model="picked" />
+    <label for="two">{{options[1]}}</label>
+    <br>
+    <input type="radio" id="three" :value="options[2]" v-model="picked" />
+    <label for="three">{{options[2]}}</label>
+    <br>
+    <input type="radio" id="four" :value="options[3]" v-model="picked" />
+    <label for="four">{{options[3]}}</label>
+    <br />
     <div id="btn">
       <div>
         <button @click="lastquest">上一题</button>
@@ -117,25 +129,50 @@ export default {
           show_time: 0,
           pass_time: 0
         }
-      ]
+      ],
+      answers: new Array(20),
+      liClass: new Array(4).fill(false)
     };
+  },
+  computed: {
+    options() {
+      return this.questions[this.$store.state.turn].options.split(",")
+    }
   },
   methods: {
     lastquest() {
-      if(this.$store.state.turn == 0) {
-        alert('这是第一道题!')
-      }else {
-        this.$store.commit('reduceTurn')
+      if (this.$store.state.turn == 0) {
+        alert("这是第一道题!");
+      } else {
+        this.$store.commit("reduceTurn");
       }
     },
     nextquest() {
-      if(this.$store.state.turn == this.questions.length - 1) {
-        this.$router.push('show')
-      }else {
-        this.$store.commit('addTurn')
+      if (this.$store.state.turn == this.questions.length - 1) {
+        this.$router.push("show");
+      } else {
+        this.$store.commit("addTurn");
       }
+    },
+    xuanze(event) {
+      this.toggle(event);
+      if (
+        event.target.innerText.endsWith(
+          this.questions[this.$store.state.turn].answer
+        )
+      ) {
+        console.log("答对了");
+        this.answers[this.$store.state.turn] = true;
+      } else {
+        this.answers[this.$store.state.turn] = false;
+        console.log("答错了");
+      }
+    },
+    toggle(event) {
+      console.log(event.target.value);
+      this.liClass[event.target.value] = !this.liClass[event.target.value];
     }
-  },
+  }
 };
 </script>
 <style scoped>

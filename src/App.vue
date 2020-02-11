@@ -1,15 +1,15 @@
 <template>
   <div id="app">
     <div id="music" @click="changeMusic">
-      <img src="./assets/img/musicoff.png" alt="music" />
+      <img id='musicImg' :src="isMusicon?onimage:offimage" alt="music" />
     </div>
     <!-- 等待解决 -->
-    <!-- <audio autoplay="autoplay">
+    <audio id="musicPlay">
       <source
         src="./assets/music/bgm.mp3"
         type="audio/mpeg"
       />
-    </audio> -->
+    </audio>
     <router-view></router-view>
   </div>
 </template>
@@ -17,9 +17,23 @@
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      onimage: require('./assets/img/musicon.png'),
+      offimage: require('./assets/img/musicoff.png'),
+      isMusicon: false
+    }
+  },
   methods: {
     changeMusic() {
-      this.$store.commit('turnMusic');
+      let musicPlay = document.getElementById('musicPlay')
+      if (this.isMusicon) {
+        this.isMusicon = false
+        musicPlay.pause()
+      }else {
+        this.isMusicon = true
+        musicPlay.play()
+      }
     }
   },
   mounted: function() {

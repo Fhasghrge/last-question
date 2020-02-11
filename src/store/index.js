@@ -7,7 +7,6 @@ const store = new Vuex.Store({
   state: {
     turn: 0,
     grade: 0,
-    isMusicOn: false,
     info: {
       openid: '',
       nickname: '',
