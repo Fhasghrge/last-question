@@ -32,8 +32,8 @@ export default {
     };
   },
   computed: {
-    endGrade() {
-      return this.$store.state.grade
+    endGrade() { // 分数计算有待
+      return this.$store.state.grade * 10
     }
   }
 };

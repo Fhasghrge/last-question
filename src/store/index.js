@@ -24,11 +24,14 @@ const store = new Vuex.Store({
       state.turn++
     },
     tiJiao(state, corrects) {
-      corrects.every((item, index, arr) => {
-        if (item) {
-          state.grade++;
+      console.log(corrects)
+      let num = 0;
+      for(let i = 0; i < corrects.length; i ++) {
+        if(corrects[i] === true){
+          num ++;
         }
-      })
+      }
+      state.grade = num
     }
   }
 })

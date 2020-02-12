@@ -121,7 +121,7 @@ export default {
           pass_time: 0
         }
       ],
-      corrects: new Array(20), // 记录选择的答案是否正确
+      corrects: new Array(20).fill(false), // 记录选择的答案是否正确
       selectNums: new Array(20).fill(-1), // 记录选择的答案，'-1'表示没有选择
       liClass: new Array(4).fill(false),
       liStyle: new Array(4).fill("defaultStyl"),
@@ -180,7 +180,7 @@ export default {
       }
     }
   },
-  // updated: function() {
+  // updated: function() { // 这个为什么用了这么卡？
   //   this.toggle()
   // }
 };
