@@ -14,14 +14,21 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    turnMusic (state) {
-      state.isMusicOn = ! state.isMusicOn
+    turnMusic(state) {
+      state.isMusicOn = !state.isMusicOn
     },
-    reduceTurn (state) {
+    reduceTurn(state) {
       state.turn--
     },
-    addTurn (state) {
+    addTurn(state) {
       state.turn++
+    },
+    tiJiao(state, corrects) {
+      corrects.every((item, index, arr) => {
+        if (item) {
+          state.grade++;
+        }
+      })
     }
   }
 })

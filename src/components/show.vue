@@ -6,7 +6,7 @@
       <div id="head"><img src="../assets/img/code.png" alt="" /></div>
     </div>
     <div id="username">{{ username }}</div>
-    <div id="grade">{{ usergrade }}</div>
+    <div id="grade">{{ endGrade }}</div>
     <div id="logo">
       <img
         src="./../assets/img/GG.png"
@@ -29,8 +29,12 @@ export default {
   data() {
     return {
       username: '用户名',
-      usergrade: '分数'
     };
+  },
+  computed: {
+    endGrade() {
+      return this.$store.state.grade
+    }
   }
 };
 </script>

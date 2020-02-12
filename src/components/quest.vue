@@ -2,30 +2,21 @@
   <div id="quest">
     <div id="title">题目</div>
     <p>{{questions[this.$store.state.turn].question}}?</p>
-    <!-- <ul>
-      <li @click="xuanze" value="0">A. {{questions[this.$store.state.turn].options.split(",")[0]}}</li>
-      <li @click="xuanze" value="1">B. {{questions[this.$store.state.turn].options.split(",")[1]}}</li>
-      <li @click="xuanze" value="2">C. {{questions[this.$store.state.turn].options.split(",")[2]}}</li>
-      <li @click="xuanze" value="3">D. {{questions[this.$store.state.turn].options.split(",")[3]}}</li>
-    </ul>-->
-    <input type="radio" id="one" :value="options[0]" v-model="picked" />
-    <label for="one">{{options[0]}}</label>
-    <br />
-    <input type="radio" id="two" :value="options[1]" v-model="picked" />
-    <label for="two">{{options[1]}}</label>
-    <br>
-    <input type="radio" id="three" :value="options[2]" v-model="picked" />
-    <label for="three">{{options[2]}}</label>
-    <br>
-    <input type="radio" id="four" :value="options[3]" v-model="picked" />
-    <label for="four">{{options[3]}}</label>
-    <br />
+    <ul>
+      <li
+        v-for="(option, index) in options"
+        :value="index"
+        :class="liStyle[index]"
+        :key="index"
+        @click="xuanze"
+      >{{abc[index]}}{{option}}</li>
+    </ul>
     <div id="btn">
       <div>
         <button @click="lastquest">上一题</button>
       </div>
       <div>
-        <button @click="nextquest">下一题</button>
+        <button @click="nextquest">{{nextBtn}}</button>
       </div>
     </div>
   </div>
@@ -130,13 +121,17 @@ export default {
           pass_time: 0
         }
       ],
-      answers: new Array(20),
-      liClass: new Array(4).fill(false)
+      corrects: new Array(20), // 记录选择的答案是否正确
+      selectNums: new Array(20).fill(-1), // 记录选择的答案，'-1'表示没有选择
+      liClass: new Array(4).fill(false),
+      liStyle: new Array(4).fill("defaultStyl"),
+      abc: ["A.", "B.", "C.", "D."],
+      nextBtn: '下一题'
     };
   },
   computed: {
     options() {
-      return this.questions[this.$store.state.turn].options.split(",")
+      return this.questions[this.$store.state.turn].options.split(",");
     }
   },
   methods: {
@@ -145,34 +140,49 @@ export default {
         alert("这是第一道题!");
       } else {
         this.$store.commit("reduceTurn");
+        this.toggle()
       }
     },
     nextquest() {
       if (this.$store.state.turn == this.questions.length - 1) {
         this.$router.push("show");
+        this.$store.commit("tiJiao", this.corrects);
       } else {
         this.$store.commit("addTurn");
+        this.toggle()
       }
     },
     xuanze(event) {
-      this.toggle(event);
+      this.selectNums[this.$store.state.turn] = event.target.value;
       if (
         event.target.innerText.endsWith(
           this.questions[this.$store.state.turn].answer
         )
       ) {
-        console.log("答对了");
-        this.answers[this.$store.state.turn] = true;
+        console.log("答对了"); // 测试
+        this.corrects[this.$store.state.turn] = true;
       } else {
-        this.answers[this.$store.state.turn] = false;
-        console.log("答错了");
+        this.corrects[this.$store.state.turn] = false;
+        console.log("答错了"); // 测试
       }
+      this.toggle();
     },
-    toggle(event) {
-      console.log(event.target.value);
-      this.liClass[event.target.value] = !this.liClass[event.target.value];
+    toggle() {
+      let targetLiNum = this.selectNums[this.$store.state.turn];
+      this.liStyle = new Array(4).fill("defaultStyl");
+      if (targetLiNum != -1) {
+        this.liStyle[targetLiNum] = "activeStyl";
+      }
+      if(this.$store.state.turn == this.questions.length - 1) {
+        this.nextBtn = '交卷'
+      } else {
+        this.nextBtn = '下一题'
+      }
     }
-  }
+  },
+  // updated: function() {
+  //   this.toggle()
+  // }
 };
 </script>
 <style scoped>
@@ -189,10 +199,20 @@ p {
 ul {
   margin: 0 auto;
 }
-li {
+.defaultStyl {
   list-style: none;
   margin-top: 5vh;
   background-color: rgb(242, 169, 8);
+  border-radius: 1vw;
+  font-size: 1.2em;
+  width: 70vw;
+  height: 1.5em;
+  padding: 0 2vw;
+}
+.activeStyl {
+  list-style: none;
+  margin-top: 5vh;
+  background-color: rgb(186, 129, 6);
   border-radius: 1vw;
   font-size: 1.2em;
   width: 70vw;
