@@ -40,6 +40,23 @@ export default {
         let ua = window.navigator.userAgent.toLowerCase();
         console.log(ua);//mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+          // 获取用户信息的模块
+          // http://localhost/BiYe2/public/users/getuserinfo 获取用户答题的次数
+          axios( {
+            url: 'http://localhost/BiYe2/public/users/getuserinfo',
+            method: 'post',
+            headers: { 'Content-Type': 'multipart/form-data'},
+            params: {
+              openid: this.$store.state.openid
+            }
+          }).then( (res) => {
+            if(res.try === 1) {
+                this.$commit('updateGrade')
+                this.$router.push('show')
+            }
+          }).catch( err => {
+            console.log(err)
+          })
             return true;
         }
         else {

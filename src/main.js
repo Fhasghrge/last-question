@@ -3,10 +3,9 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 import axios from 'axios'
-Vue.prototype.$axios = axios;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-import qs from 'qs';
-Vue.prototype.qs = qs;
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios,axios); // 全局使用axios
 
 Vue.config.productionTip = false
 Vue.prototype.$axios

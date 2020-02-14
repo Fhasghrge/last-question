@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import func from "../../vue-temp/vue-editor-bridge";
 export default {
   name: "quest",
   data() {
@@ -122,16 +123,26 @@ export default {
         }
       ],
       corrects: new Array(20).fill(false), // 记录选择的答案是否正确
+      examid: -1,
       selectNums: new Array(20).fill(-1), // 记录选择的答案，'-1'表示没有选择
       liClass: new Array(4).fill(false),
       liStyle: new Array(4).fill("defaultStyl"),
       abc: ["A.", "B.", "C.", "D."],
-      nextBtn: '下一题'
+      nextBtn: "下一题"
     };
   },
   computed: {
     options() {
       return this.questions[this.$store.state.turn].options.split(",");
+    },
+    handelCorrects () {
+      let resCorrects = [];
+      for(let i = 0; i < this.corrects.length; i++) {
+        if(this.corrects[i] === true) {
+          resCorrects.push(i)
+        }
+      }
+      return resCorrects;
     }
   },
   methods: {
@@ -140,16 +151,37 @@ export default {
         alert("这是第一道题!");
       } else {
         this.$store.commit("reduceTurn");
-        this.toggle()
+        this.toggle();
       }
     },
     nextquest() {
       if (this.$store.state.turn == this.questions.length - 1) {
-        this.$router.push("show");
         this.$store.commit("tiJiao", this.corrects);
+        // 提交答卷
+        axios({
+          url: 'http://localhost/BiYe2/public/users/submit',
+          method: 'post',
+          headers: {'Content-Type': 'multipart/form-data'},
+          params: {
+            openid: this.$store.state.openid,
+            examid: this.examid,
+            correct: this.handelCorrects
+          }
+        }).then( (res) => {
+          if(res.try === -1) {
+            console('err')
+          }else if(res.try === 1){
+            alert('提交成功')
+          } else {
+            alert('你已经提交')
+          }
+        }).catch( (err) => {
+          console.log(err)
+        })
+        this.$router.push("show");
       } else {
         this.$store.commit("addTurn");
-        this.toggle()
+        this.toggle();
       }
     },
     xuanze(event) {
@@ -173,16 +205,34 @@ export default {
       if (targetLiNum != -1) {
         this.liStyle[targetLiNum] = "activeStyl";
       }
-      if(this.$store.state.turn == this.questions.length - 1) {
-        this.nextBtn = '交卷'
+      if (this.$store.state.turn == this.questions.length - 1) {
+        this.nextBtn = "交卷";
       } else {
-        this.nextBtn = '下一题'
+        this.nextBtn = "下一题";
       }
     }
   },
   // updated: function() { // 这个为什么用了这么卡？
   //   this.toggle()
   // }
+  mounted: function() {
+    // 获取题目信息
+    axios({
+      url: "http://localhost/BiYe2/public/users/getproblem",
+      method: "post",
+      headers: { "Content-Type": "multipart/form-data" },
+      params: {
+        openid: this.$store.state.openid
+      }
+    })
+      .then(res => {
+        this.questions = res.data;
+        this.examid = res.examid;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 </script>
 <style scoped>
