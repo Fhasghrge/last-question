@@ -60,7 +60,7 @@ export default {
             return true;
         }
         else {
-          console.log('不是微信')
+          console.log('不是微信')// 测试版本
           // window.parent.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx135f29e2d2abe22f&redirect_uri=http%3A%2F%2Fbiye.stuhome.com%2Fstaging%2Fwxlogin.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
         }
   }
