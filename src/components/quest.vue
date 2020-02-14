@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-import func from "../../vue-temp/vue-editor-bridge";
 export default {
   name: "quest",
   data() {
@@ -158,7 +157,7 @@ export default {
       if (this.$store.state.turn == this.questions.length - 1) {
         this.$store.commit("tiJiao", this.corrects);
         // 提交答卷
-        axios({
+        this.$http({
           url: 'http://localhost/BiYe2/public/users/submit',
           method: 'post',
           headers: {'Content-Type': 'multipart/form-data'},
@@ -217,7 +216,7 @@ export default {
   // }
   mounted: function() {
     // 获取题目信息
-    axios({
+    this.$http({
       url: "http://localhost/BiYe2/public/users/getproblem",
       method: "post",
       headers: { "Content-Type": "multipart/form-data" },

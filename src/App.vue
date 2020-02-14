@@ -42,7 +42,7 @@ export default {
         if (ua.match(/MicroMessenger/i) == 'micromessenger') {
           // 获取用户信息的模块
           // http://localhost/BiYe2/public/users/getuserinfo 获取用户答题的次数
-          axios( {
+          this.$http( {
             url: 'http://localhost/BiYe2/public/users/getuserinfo',
             method: 'post',
             headers: { 'Content-Type': 'multipart/form-data'},

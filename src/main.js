@@ -3,12 +3,9 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-Vue.use(VueAxios,axios); // 全局使用axios
 
 Vue.config.productionTip = false
-Vue.prototype.$axios
+Vue.prototype.$http = axios
 new Vue({
   router,
   store,
