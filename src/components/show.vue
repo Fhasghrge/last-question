@@ -3,7 +3,7 @@
     <div id="title">成电毕业生认证</div>
     <div id="userbg">
       <img src="./../assets/img/cat.png" alt="图标" width="70" />
-      <div id="head"><img src="../assets/img/code.png" alt="" /></div>
+      <div id="head"><img :src="headUrl" /></div>
     </div>
     <div id="username">{{ username }}</div>
     <div id="grade">{{ endGrade }}</div>
@@ -20,6 +20,7 @@
     </div>
     <div id="code">
       <img src="../assets/img/code.png" alt="二维码" />
+      <!-- 有待替换 -->
     </div>
   </div>
 </template>
@@ -34,6 +35,9 @@ export default {
   computed: {
     endGrade() { // 分数计算有待
       return this.$store.state.grade * 10
+    },
+    headUrl() {
+      return this.$store.state.info.headimgurl
     }
   }
 };
@@ -47,11 +51,12 @@ export default {
   font-size: 1.5em;
 }
 #head {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 60px;
   height: 60px;
   border-radius: 50%;
   margin: -26px auto 0;
+  overflow: hidden;
 }
 #head > img {
   width: 60px;

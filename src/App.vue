@@ -1,14 +1,11 @@
 <template>
   <div id="app">
     <div id="music" @click="changeMusic">
-      <img id='musicImg' :src="isMusicon?onimage:offimage" alt="music" />
+      <img id="musicImg" :src="isMusicon?onimage:offimage" alt="music" />
     </div>
     <!-- 等待解决 -->
     <audio id="musicPlay">
-      <source
-        src="./assets/music/bgm.mp3"
-        type="audio/mpeg"
-      />
+      <source src="./assets/music/bgm.mp3" type="audio/mpeg" />
     </audio>
     <router-view></router-view>
   </div>
@@ -16,53 +13,63 @@
 
 <script>
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
-      onimage: require('./assets/img/musicon.png'),
-      offimage: require('./assets/img/musicoff.png'),
+      onimage: require("./assets/img/musicon.png"),
+      offimage: require("./assets/img/musicoff.png"),
       isMusicon: false
-    }
+    };
   },
   methods: {
     changeMusic() {
-      let musicPlay = document.getElementById('musicPlay')
+      let musicPlay = document.getElementById("musicPlay");
       if (this.isMusicon) {
-        this.isMusicon = false
-        musicPlay.pause()
-      }else {
-        this.isMusicon = true
-        musicPlay.play()
+        this.isMusicon = false;
+        musicPlay.pause();
+      } else {
+        this.isMusicon = true;
+        musicPlay.play();
       }
     }
   },
   mounted: function() {
-        let ua = window.navigator.userAgent.toLowerCase();
-        console.log(ua);//mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
-        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-          // 获取用户信息的模块
-          // http://localhost/BiYe2/public/users/getuserinfo 获取用户答题的次数
-          this.$http( {
-            url: 'http://localhost/BiYe2/public/users/getuserinfo',
-            method: 'post',
-            headers: { 'Content-Type': 'multipart/form-data'},
-            params: {
-              openid: this.$store.state.openid
-            }
-          }).then( (res) => {
-            if(res.try === 1) {
-                this.$commit('updateGrade')
-                this.$router.push('show')
-            }
-          }).catch( err => {
-            console.log(err)
-          })
-            return true;
+    let ua = window.navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+      // 获取用户信息
+      this.$http({
+        url: "http://localhost/BiYe2/public/users/getcode",
+        method: "get"
+      })
+        .then(res => {
+          res = JSON.parse(res);
+          this.$commit("infoUpdate", res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      // 获取用户答题的次数，如果已经答完题目就直接显示
+      this.$http({
+        url: "http://localhost/BiYe2/public/users/getuserinfo",
+        method: "post",
+        headers: { "Content-Type": "multipart/form-data" },
+        params: {
+          openid: this.$store.state.openid
         }
-        else {
-          console.log('不是微信')// 测试版本
-          // window.parent.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx135f29e2d2abe22f&redirect_uri=http%3A%2F%2Fbiye.stuhome.com%2Fstaging%2Fwxlogin.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
-        }
+      })
+        .then(res => {
+          if (res.try === 1) {
+            this.$commit("updateGrade", res.score);
+            this.$router.push("show");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      return true;
+    } else {
+      console.log("不是微信"); // 测试版本
+    }
   }
 };
 </script>

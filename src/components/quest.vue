@@ -211,9 +211,6 @@ export default {
       }
     }
   },
-  // updated: function() { // 这个为什么用了这么卡？
-  //   this.toggle()
-  // }
   mounted: function() {
     // 获取题目信息
     this.$http({

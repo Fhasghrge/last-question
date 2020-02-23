@@ -24,7 +24,6 @@ const store = new Vuex.Store({
       state.turn++
     },
     tiJiao(state, corrects) {
-      console.log(corrects)
       let num = 0;
       for(let i = 0; i < corrects.length; i ++) {
         if(corrects[i] === true){
@@ -32,6 +31,14 @@ const store = new Vuex.Store({
         }
       }
       state.grade = num
+    },
+    infoUpdate(state, resInfo) {
+      state.info.openid = resInfo.openid
+      state.info.nickname = resInfo.nickname
+      state.info.headimgurl =resInfo.headimgurl
+    },
+    updateGrade(state, gradeUpdata) {
+      state.grade = gradeUpdata / 10
     }
   }
 })
