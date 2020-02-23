@@ -94,7 +94,7 @@ export default {
 #code > img {
   height: 5em;
   width: 5em;
-  margin-left: 5vw;
-  margin-top: 1vh;
+  margin-left: 3vw;
+  margin-top: -4vh;
 }
 </style>

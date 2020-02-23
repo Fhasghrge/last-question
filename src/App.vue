@@ -38,10 +38,11 @@ export default {
     if (ua.match(/MicroMessenger/i) == "micromessenger") {
       // 获取用户信息
       this.$http({
-        url: "http://localhost/BiYe2/public/users/getcode",
+        url: "http://9daejz.natappfree.cc/BiYe2/public/users/getcode",
         method: "get"
       })
         .then(res => {
+          console.log('获取用户信息', res)
           res = JSON.parse(res);
           this.$commit("infoUpdate", res);
         })

@@ -20,17 +20,20 @@ export default {
 </script>
 <style scoped>
 @import url('./../assets/css/index.css');
+#logo {
+  /* border: 1px solid red; */
+  margin-top: 50px;
+  margin-bottom: -170px
+}
 #logo > img {
-  position: absolute;
   width: 100vw;
-  top: 15vh;
 }
 #main {
   border: 1px solid black;
   border-radius: 3vw;
   width: 80vw;
-  margin: 36vh auto;
-  padding: 14vh 0 5vh;
+  margin: 0vh auto;
+  padding: 80px 0 5vh;
   text-align: center;
   background-color: white;
   font-weight: bold;
