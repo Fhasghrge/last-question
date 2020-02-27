@@ -6,7 +6,7 @@
       <div id="head"><img :src="headUrl" /></div>
     </div>
     <div id="username">{{ username }}</div>
-    <div id="grade">{{ endGrade }}</div>
+    <div id="grade" class="animated swing delay-1s">{{ endGrade }}</div>
     <div id="logo">
       <img
         src="./../assets/img/GG.png"
@@ -94,7 +94,7 @@ export default {
 #code > img {
   height: 5em;
   width: 5em;
-  margin-left: 3vw;
-  margin-top: -4vh;
+  margin-left: 8vw;
+  margin-top: 0vh;
 }
 </style>

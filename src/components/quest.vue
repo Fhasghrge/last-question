@@ -238,9 +238,13 @@ export default {
   font-size: 2em;
   font-weight: bold;
   margin-top: 15vh;
+  font-family:  LiSu
 }
 p {
   text-align: center;
+  font-family: LiSu;
+  font-size: 1.1em;
+  height: 2em;
 }
 ul {
   margin: 0 auto;
@@ -275,9 +279,10 @@ button {
   width: 7em;
   height: 2.2em;
   background-color: rgb(237, 163, 5);
-  border: 0.1px solid black;
+  border: none;
   color: white;
   /* font-size: 1.3em */
   border-radius: 4px;
+  box-shadow: -1px 1px 3px rgb(189, 138, 80);
 }
 </style>
