@@ -1,7 +1,13 @@
 <template>
   <div id="quest">
-    <div id="title">题目</div>
-    <p>{{questions[this.$store.state.turn].question}}?</p>
+    <div id="title">题目
+      <span>
+        {{this.$store.state.turn + 1}}
+      </span>
+    </div>
+    <p>
+      {{questions[this.$store.state.turn].question}}?
+    </p>
     <ul>
       <li
         v-for="(option, index) in options"
@@ -66,7 +72,7 @@ export default {
         {
           id: 50,
           question:
-            "“明明可以靠颜值，却偏要靠实力。“她是我电最年轻的副院长，她于_____年来我电工作",
+            "“明明可以靠颜值，却偏要靠实力。”她是我电最年轻的副院长，她于_____年来我电工作",
           options: "2014,2015,2016,2017",
           answer: "2015",
           type: "名教师",
@@ -190,11 +196,11 @@ export default {
           this.questions[this.$store.state.turn].answer
         )
       ) {
-        console.log("答对了"); // 测试
+        // console.log("答对了"); // 测试
         this.corrects[this.$store.state.turn] = true;
       } else {
         this.corrects[this.$store.state.turn] = false;
-        console.log("答错了"); // 测试
+        // console.log("答错了"); // 测试
       }
       this.toggle();
     },
@@ -245,40 +251,51 @@ p {
   font-family: LiSu;
   font-size: 1.1em;
   height: 2em;
+  padding: 0 2em;
+}
+#title > span {
+  /* border: 1px solid #353b48; */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  border-radius: 50%;
+  box-shadow: 1px 1px 9px  #353b48;
+  padding: .01em;
+  font-size: .9em;
 }
 ul {
   margin: 0 auto;
+  width: 60vw;
+  padding: 0;
+}
+ul > li {
+  list-style: none;
+  margin: 1em 0;
+  height: 2em;
+  line-height: 2em;
+  text-indent: .3em;
 }
 .defaultStyl {
-  list-style: none;
-  margin-top: 5vh;
   background-color: rgb(242, 169, 8);
   border-radius: 1vw;
   font-size: 1.2em;
-  width: 70vw;
-  height: 1.5em;
-  padding: 0 2vw;
 }
 .activeStyl {
-  list-style: none;
-  margin-top: 5vh;
   background-color: rgb(186, 129, 6);
   border-radius: 1vw;
   font-size: 1.2em;
-  width: 70vw;
-  height: 1.5em;
-  padding: 0 2vw;
 }
 #btn {
-  margin: 10vh auto;
+  margin: 10vh 15vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content:space-around;
 }
 button {
   width: 7em;
   height: 2.2em;
-  background-color: rgb(237, 163, 5);
+  background-color: #f0932b;
   border: none;
   color: white;
   /* font-size: 1.3em */

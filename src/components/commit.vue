@@ -24,7 +24,7 @@ export default {
   font-family: STXingkai;
 }
 p {
-  border: 1px solid rgb(255, 191, 111);
+  /* border: 1px solid rgb(255, 191, 111); */
   width: 10em;
   height: 16em;
   font-size: 1.2em;
@@ -33,6 +33,8 @@ p {
   line-height: 2em;
   padding: 0 12px;
   font-family: KaiTi;
+  border-radius: 2vw;
+  box-shadow: 1px 1px 8px rgb(231, 176, 73);
 }
 button {
   background-color: rgb(246, 174, 68);
