@@ -250,8 +250,9 @@ p {
   text-align: center;
   font-family: LiSu;
   font-size: 1.1em;
-  height: 2em;
+  height: 3em;
   padding: 0 2em;
+  /* border: 1px solid red; */
 }
 #title > span {
   /* border: 1px solid #353b48; */
